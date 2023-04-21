@@ -6,7 +6,7 @@ First, run the development server:
 ```bash
 1: start json-server by these command => npm run server
 2: start next app by these command => npm run dev  or  yarn dev
-
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
