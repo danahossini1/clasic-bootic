@@ -1,9 +1,30 @@
+import Head from "next/head";
+import HomePage from "@/components/template/HomePage";
 
-export default function Home() {
-
+export default function Home(props) {
   return (
-    <main className="flex justify-center flex-col ntext-2xl">
-      <h1>Hello World</h1>
-    </main>
+    <>
+      <Head>
+        <title className="font-[lalezar]">بوتیک کلاسیک | صفحه اصلی</title>
+        <meta
+          name="discription"
+          content="classic botic is my test website"
+        />
+      </Head>
+      <main>
+        <HomePage props={...props.data} />
+      </main>
+    </>
   )
+}
+
+
+export async function getStaticProps() {
+
+  const res = await fetch(`${process.env.API}/popular`)
+  const data = await res.json()
+
+  return {
+    props: { data }
+  }
 }
