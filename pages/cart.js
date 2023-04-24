@@ -11,26 +11,15 @@ export default function cart() {
 
   const [cartProduct, setCartProdect] = useState([])
 
-  const [priceCount, setPriceCount] = useState(null)
-  const [freeCount, setFreeCount] = useState(null)
 
   const notify = (text) => toast.success(text);
   const route = useRouter()
 
   const getLocal = () => {
     let local = JSON.parse(localStorage.getItem('cart'))
-    console.log(local);
+
     if (local) {
       setCartProdect(local)
-      let price = 0
-      let free = 0
-      local && local.map(item => {
-        let mines = (item.product.price * item.product.free) / 100
-        price += (item.product.price * item.number)
-        free += (mines * item.number)
-      })
-      setPriceCount(price)
-      setFreeCount(free)
 
     } else {
       setCartProdect([])
@@ -39,7 +28,6 @@ export default function cart() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // setCartProdect(JSON.parse(localStorage.getItem('cart')))
     getLocal()
   }, [])
 
@@ -93,8 +81,8 @@ export default function cart() {
         {cartProduct.length ?
           <div className='md:flex justify-around'>
             <div className=''>
-              {cartProduct.map((product) =>
-                <CartCard key={product.id} deleteCart={deleteCart} mathOpration={mathOpration} props={product} />)}
+              {cartProduct.map((item) =>
+                <CartCard key={item.product.id} deleteCart={deleteCart} mathOpration={mathOpration} props={item} />)}
             </div>
             <div className='w-1/2 mt-4 text-center'>
               <div className='md:w-1/2 m-auto flex flex-col gap-3'>
